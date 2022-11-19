@@ -220,3 +220,32 @@ def cv_errors(X, y, max_iter,
 
     return training_errors, testing_errors
 
+
+
+max_iter = 20
+reg_lambdas_linear = np.linspace( 1e-10, 1e-6, 100, dtype = float )
+# reg_lambdas_linear = np.linspace( 5e-13, 1e-10, 100, dtype = float )
+(train_error_lk, 
+ test_error_lk ) = cv_hype(X, y, max_iter = max_iter , 
+                            reg_lambdas = reg_lambdas_linear, 
+                            kernel_type = 'linear',
+                            gamma = None)
+
+
+reg_gamma = 1e-5
+# reg_lambdas_rbf = np.linspace( 1e-5, 1e-4, 100, dtype = float )
+reg_lambdas_rbf = np.linspace( 1e-5, 5e-3, 100, dtype = float )
+(train_error_rbf, 
+  test_error_rbf ) = cv_hype(X, y, max_iter = max_iter , 
+                            reg_lambdas = reg_lambdas_rbf, 
+                            kernel_type = 'rbf', 
+                            gamma = reg_gamma)
+
+(train_error_gls, 
+  test_error_gls ) = cv_hype(X, y, max_iter = max_iter , 
+                            reg_lambdas = reg_lambdas_rbf, 
+                            kernel_type = 'gls', 
+                            gamma = None)
+
+
+
